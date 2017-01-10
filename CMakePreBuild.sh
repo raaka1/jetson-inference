@@ -27,16 +27,18 @@ sudo ln -s /usr/lib/aarch64-linux-gnu/tegra/libGL.so /usr/lib/aarch64-linux-gnu/
 
 # uncomment to download Alexnet (220MB)
 #wget http://dl.caffe.berkeleyvision.org/bvlc_alexnet.caffemodel
-#mv bvlc_alexnet.caffemodel ../data/networks
+wget --no-check-certificate 'https://nvidia.box.com/shared/static/5j264j7mky11q8emy4q14w3r8hl5v6zh.caffemodel' -O bvlc_alexnet.caffemodel
+mv bvlc_alexnet.caffemodel ../data/networks
 
-# GoogleNet
-wget http://dl.caffe.berkeleyvision.org/bvlc_googlenet.caffemodel
+# GoogleNet (bvlc site was behaving slowly, so enabled mirror on nvidia.box.com instead)
+#wget http://dl.caffe.berkeleyvision.org/bvlc_googlenet.caffemodel
+wget --no-check-certificate 'https://nvidia.box.com/shared/static/at8b1105ww1c5h7p30j5ko8qfnxrs0eg.caffemodel' -O bvlc_googlenet.caffemodel
 mv bvlc_googlenet.caffemodel ../data/networks
 
 
 # DetectNet's  (uncomment to download)
-#wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=0BwYxpotGWRNOMzVRODNuSHlvbms' -O ped-100.tar.gz
-#tar -xzvf ped-100.tar.gz -C ../data/networks
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=0BwYxpotGWRNOMzVRODNuSHlvbms' -O ped-100.tar.gz
+tar -xzvf ped-100.tar.gz -C ../data/networks
 
 wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=0BwYxpotGWRNOUmtGdGIyYjlEbTA' -O multiped-500.tar.gz
 tar -xzvf multiped-500.tar.gz -C ../data/networks

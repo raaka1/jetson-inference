@@ -18,7 +18,7 @@
 #include "detectNet.h"
 
 
-#define DEFAULT_CAMERA -1	// -1 for onboard camera, or change to index of V4L2 camera (>=0)	
+#define DEFAULT_CAMERA -1	// -1 for onboard camera, or change to index of /dev/video V4L2 camera (>=0)	
 		
 
 bool signal_recieved = false;
@@ -50,9 +50,11 @@ int main( int argc, char** argv )
 
 	if( argc > 1 )
 	{
-		if( strcmp(argv[1], "ped-100") == 0 )
+		if( strcmp(argv[1], "multiped") == 0 || strcmp(argv[1], "pednet") == 0 || strcmp(argv[1], "multiped-500") == 0 )
+			networkType = detectNet::PEDNET_MULTI;
+		else if( strcmp(argv[1], "ped-100") == 0 )
 			networkType = detectNet::PEDNET;
-		else if( strcmp(argv[1], "facenet-120") == 0 || strcmp(argv[1], "face-120") == 0 )
+		else if( strcmp(argv[1], "facenet") == 0 || strcmp(argv[1], "facenet-120") == 0 || strcmp(argv[1], "face-120") == 0 )
 			networkType = detectNet::FACENET;
 	}
 	
@@ -189,6 +191,8 @@ int main( int argc, char** argv )
 						
 					lastClass = nc;
 					lastStart = n;
+
+					CUDA(cudaDeviceSynchronize());
 				}
 			}
 		
